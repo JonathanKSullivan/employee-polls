@@ -14,7 +14,6 @@ const store = createStore(
   middleware
 );
 
-// Define RootState and AppDispatch for usage in the app
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

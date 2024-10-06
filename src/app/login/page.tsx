@@ -3,11 +3,11 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleReceiveUsers, loginUser } from '@/actions/users';
-import { handleReceivePolls } from '@/actions/polls';  // Add this if you are receiving polls too
+import { handleReceivePolls } from '@/actions/polls';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button, Input, Form, message, Typography, Spin } from 'antd';
-import { RootState, AppDispatch } from '@/app/store'; // Import AppDispatch for proper dispatch typing
-import { User } from '@/types/user'; // Assuming there's a type for User
+import { RootState, AppDispatch } from '@/app/store';
+import { User } from '@/types/user';
 
 const { Title, Text } = Typography;
 
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
-  const dispatch = useDispatch<AppDispatch>();  // Ensure dispatch is typed with AppDispatch
+  const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((state: RootState) => state.users);
 
   return (
@@ -39,7 +39,7 @@ interface LoginContentProps {
   password: string;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   users: Record<string, User>;
-  router: ReturnType<typeof useRouter>; // Correct typing for the router
+  router: ReturnType<typeof useRouter>;
   dispatch: AppDispatch;
 }
 
@@ -56,8 +56,8 @@ const LoginContent: React.FC<LoginContentProps> = ({
   const from = searchParams.get('from') || '/';
 
   useEffect(() => {
-    dispatch(handleReceiveUsers());  // handleReceiveUsers is a thunk action
-    dispatch(handleReceivePolls());  // handleReceivePolls is also a thunk action
+    dispatch(handleReceiveUsers());
+    dispatch(handleReceivePolls());
   }, [dispatch]);
 
   const handleInputChange =

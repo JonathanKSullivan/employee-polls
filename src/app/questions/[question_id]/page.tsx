@@ -13,15 +13,15 @@ import {
   getUserAnswer,
 } from '@/utils/pollUtils';
 import { handleAnswerPoll } from '@/actions/polls';
-import { RootState, AppDispatch } from '@/app/store'; // Import AppDispatch
+import { RootState, AppDispatch } from '@/app/store';
 
 const { Title, Paragraph, Text } = Typography;
 
 const PollPage: React.FC = () => {
   const router = useRouter();
   const { question_id } = useParams() as { question_id: string };
-  const [selectedOption, setSelectedOption] = useState<'optionOne' | 'optionTwo' | null>(null); // Typed correctly
-  const dispatch = useDispatch<AppDispatch>(); // Correctly typed dispatch
+  const [selectedOption, setSelectedOption] = useState<'optionOne' | 'optionTwo' | null>(null);
+  const dispatch = useDispatch<AppDispatch>()
 
   const polls = useSelector((state: RootState) => state.polls);
   const users = useSelector((state: RootState) => state.users);

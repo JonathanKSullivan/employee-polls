@@ -9,7 +9,7 @@ import Nav from './components/nav';
 import UserInfo from './components/userInfo';
 import PollList from './components/pollList';
 import LoggedOutView from './components/loggedOutView';
-import { RootState, AppDispatch } from '@/app/store'; // Import AppDispatch
+import { RootState, AppDispatch } from '@/app/store';
 import { Poll as PollType } from '@/types/poll';
 
 const { TabPane } = Tabs;
@@ -19,7 +19,6 @@ const Home: React.FC = () => {
   const [answeredPolls, setAnsweredPolls] = useState<PollType[]>([]);
   const [unansweredPolls, setUnansweredPolls] = useState<PollType[]>([]);
 
-  // Correctly typed dispatch with AppDispatch for thunk support
   const dispatch = useDispatch<AppDispatch>();
 
   const authedUser = useSelector((state: RootState) => state.authedUser);
