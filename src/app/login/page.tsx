@@ -8,30 +8,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Button, Input, Form, message, Typography, Spin } from 'antd';
 import { RootState, AppDispatch } from '@/app/store';
 import { User } from '@/types/user';
+import Nav from '../components/nav';
 
 const { Title, Text } = Typography;
 
-const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter();
-  const dispatch = useDispatch<AppDispatch>();
-  const users = useSelector((state: RootState) => state.users);
-
-  return (
-    <Suspense fallback={<Spin tip="Loading..." />}>
-      <LoginContent 
-        username={username} 
-        setUsername={setUsername} 
-        password={password} 
-        setPassword={setPassword}
-        users={users}
-        router={router}
-        dispatch={dispatch}
-      />
-    </Suspense>
-  );
-};
 
 interface LoginContentProps {
   username: string;
@@ -78,7 +58,9 @@ const LoginContent: React.FC<LoginContentProps> = ({
   };
 
   return (
+
     <div>
+      <Nav currentTab='' />
       <div style={{ maxWidth: '400px', margin: '50px auto' }}>
         <Title level={2}>Welcome Back!</Title>
         <Text type="secondary">
@@ -124,6 +106,28 @@ const LoginContent: React.FC<LoginContentProps> = ({
         </Text>
       </div>
     </div>
+  );
+};
+
+const Login: React.FC = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+  const users = useSelector((state: RootState) => state.users);
+
+  return (
+    <Suspense fallback={<Spin tip="Loading..." />}>
+      <LoginContent 
+        username={username} 
+        setUsername={setUsername} 
+        password={password} 
+        setPassword={setPassword}
+        users={users}
+        router={router}
+        dispatch={dispatch}
+      />
+    </Suspense>
   );
 };
 

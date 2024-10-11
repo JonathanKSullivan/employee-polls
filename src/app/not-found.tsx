@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button, Result } from 'antd';
 import { useRouter } from 'next/navigation';
+import Nav from '@/app/components/nav';
 
 const NotFound: React.FC = () => {
   const router = useRouter();
@@ -12,18 +13,21 @@ const NotFound: React.FC = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <Result
-        status="404"
-        title="404"
-        subTitle="Sorry, the page you visited does not exist."
-        extra={
-          <Button type="primary" onClick={handleBackHome}>
-            Back Home
-          </Button>
-        }
-      />
-    </div>
+    <>
+      <Nav currentTab='' />
+      <div style={styles.container}>
+        <Result
+          status="404"
+          title="404"
+          subTitle="Sorry, the page you visited does not exist."
+          extra={
+            <Button type="primary" onClick={handleBackHome}>
+              Back Home
+            </Button>
+          }
+        />
+      </div>
+    </>
   );
 };
 

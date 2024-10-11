@@ -14,6 +14,7 @@ import {
 } from '@/utils/pollUtils';
 import { handleAnswerPoll } from '@/actions/polls';
 import { RootState, AppDispatch } from '@/app/store';
+import NotFound from '@/app/not-found';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -34,6 +35,11 @@ const PollPage: React.FC = () => {
   }, [authedUser, router, question_id]);
 
   const poll = polls[question_id];
+
+  if (!poll) {
+    return <NotFound />;
+  }
+
   const author = poll ? users[poll.author] : null;
 
   const userAnswer = useMemo(() => {

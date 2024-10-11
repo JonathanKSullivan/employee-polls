@@ -58,6 +58,28 @@ const Home: React.FC = () => {
 
   const user = users[authedUser];
 
+  const MyTabs = () => {
+    const items = [
+      {
+        key: '1',
+        label: 'Unanswered Poll',
+        children: <PollList polls={unansweredPolls} users={users} onVote={onVote} />
+      },{
+        key: '2',
+        label: 'Answered Poll',
+        children: <PollList
+          polls={answeredPolls}
+          users={users}
+          answered={true}
+          authedUser={authedUser}
+          onVote={onVote}
+        />
+      }
+    ];
+
+    return <Tabs defaultActiveKey="1" items={items} style={{ marginTop: '20px' }}/>
+  }
+
   return (
     <div>
       <Nav currentTab="home" />
@@ -72,21 +94,7 @@ const Home: React.FC = () => {
 
         <Divider />
 
-        <Tabs defaultActiveKey="1" style={{ marginTop: '20px' }}>
-          <TabPane tab="Unanswered Polls" key="1">
-            <PollList polls={unansweredPolls} users={users} onVote={onVote} />
-          </TabPane>
-
-          <TabPane tab="Answered Polls" key="2">
-            <PollList
-              polls={answeredPolls}
-              users={users}
-              answered={true}
-              authedUser={authedUser}
-              onVote={onVote}
-            />
-          </TabPane>
-        </Tabs>
+        <MyTabs />
       </div>
     </div>
   );
