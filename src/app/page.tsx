@@ -12,7 +12,6 @@ import LoggedOutView from './components/loggedOutView';
 import { RootState, AppDispatch } from '@/app/store';
 import { Poll as PollType } from '@/types/poll';
 
-const { TabPane } = Tabs;
 const { Title, Text, Paragraph } = Typography;
 
 const Home: React.FC = () => {

@@ -35,11 +35,6 @@ const PollPage: React.FC = () => {
   }, [authedUser, router, question_id]);
 
   const poll = polls[question_id];
-
-  if (!poll) {
-    return <NotFound />;
-  }
-
   const author = poll ? users[poll.author] : null;
 
   const userAnswer = useMemo(() => {
@@ -55,6 +50,10 @@ const PollPage: React.FC = () => {
   const optionTwoPercentage = poll
     ? calculateVotePercentage(poll.optionTwo.votes.length, totalVotes)
     : 0;
+
+  if (!poll) {
+    return <NotFound />;
+  }
 
   const onOptionChange = (option: 'optionOne' | 'optionTwo') =>
     setSelectedOption(option);
