@@ -1,0 +1,5 @@
+Add video and screenshoots
+- Video('/screen-capture.webm') shows that on  my end there are no console errors and the expected behavior described is implemented when navigating to unknown question.
+
+- Screenshot('/Screenshot 2024-10-15 at 1.35.15 PM.png') shows that on my end there are 7 test suites pass with a total of 21 passed tests and 1 passed snapshot.
+
