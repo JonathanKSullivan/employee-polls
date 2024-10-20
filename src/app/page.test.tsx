@@ -1,13 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { render, act } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import reducers from '@/reducers';
-import middleware from '@/middleware';
 import Home from './page';
 import { useRouter } from 'next/navigation';
 import renderer from 'react-test-renderer';
+import middleware from '@/middleware';
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
@@ -19,6 +20,14 @@ const store = createStore(
   middleware
 );
 
+beforeAll(() => {
+  const originalError = console.error;
+  jest.spyOn(console, 'error').mockImplementation((message) => {
+    if (typeof message === 'string' && message.includes('deprecated')) return;
+    originalError(message);
+  });
+});
+
 describe('Home Page', () => {
   beforeEach(() => {
     const mockPush = jest.fn();
@@ -28,20 +37,22 @@ describe('Home Page', () => {
     });
   });
 
-  it('should render the home page', () => {
-    const { getByText } = render(
-      <Provider store={store}>
-        <Home />
-      </Provider>
-    );
+  it('should render the home page with welcome text', async () => {
+    await act(async () => {
+      render(
+        <Provider store={store}>
+          <Home />
+        </Provider>
+      );
+    });
 
-    expect(getByText('Welcome to the Polling App!')).toBeInTheDocument();
+    expect(screen.getByText('Welcome to the Polling App!')).toBeInTheDocument();
   });
 
-  it('should match the snapshot', () => {
+  it('should match the snapshot', async () => {
     let component;
 
-    act(() => {
+    await act(async () => {
       component = renderer.create(
         <Provider store={store}>
           <Home />

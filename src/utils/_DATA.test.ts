@@ -1,6 +1,14 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect, beforeAll, afterAll } from '@jest/globals';
 import { _saveQuestion, _saveQuestionAnswer } from './_DATA';
-import { Answer } from '@/types/poll';
+import { Answer } from '../types/poll';
+
+beforeAll(() => {
+  jest.spyOn(console, 'log').mockImplementation(() => {});
+});
+
+afterAll(() => {
+  jest.restoreAllMocks();
+});
 
 const validQuestion = {
   optionOneText: 'Learn React',
